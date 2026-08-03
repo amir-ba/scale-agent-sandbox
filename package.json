@@ -1,0 +1,16 @@
+{
+  "name": "scale-barcamp-sandbox",
+  "version": "1.0.0",
+  "description": "Minimal sandbox for the AI Barcamp proactive-agents demo",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "stencil build",
+    "test": "stencil test --spec",
+    "lint": "prettier --check \"src/**/*.{ts,tsx,css}\""
+  },
+  "devDependencies": {
+    "@stencil/core": "^4.0.0",
+    "prettier": "^3.0.0"
+  }
+}

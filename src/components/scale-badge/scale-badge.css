@@ -1,0 +1,22 @@
+.badge {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: bold;
+  background-color: #888;
+  color: white;
+}
+
+:host([color="danger"]) .badge {
+  background-color: #e00;
+}
+
+:host([color="success"]) .badge {
+  background-color: #0a0;
+}
+
+:host([color="warning"]) .badge {
+  background-color: #f90;
+  color: #333;
+}
