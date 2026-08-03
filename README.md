@@ -58,6 +58,8 @@ node orchestrator.mjs --run-worker --pr 3
 ```
 Watch the agent pull the stale PR branch, fix prettier violations, and update the PR.
 
+
+all the steps and the integaraion of this in claude code is flaky so we atempt to fix this as we go to learn together. 
 ## Architecture
 
 ```
