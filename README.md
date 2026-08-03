@@ -20,45 +20,33 @@ gh auth login
 npm install -g @anthropic-ai/claude-code
 ```
 
-## Seed the board (run once)
+## Seed your board (run once after forking)
 
-Before the session, populate the repo with the pre-baked issues and stale PR:
+One script does everything: creates the two issues, opens the stale PR, creates a
+GitHub Project board under your own account, and adds all three items to it as **Backlog**.
 
 ```bash
-# Creates Issue #1 (P0 bug) and Issue #2 (vague feature)
 bash scripts/seed-issues.sh
-
-# Create the stale PR that fails prettier (PR #3)
-git checkout -b stale-prettier-fix
-# Make a trivial whitespace change that breaks prettier rules
-echo "" >> src/components/scale-badge/scale-badge.tsx
-git commit -am "wip: attempted badge color fix"
-gh pr create \
-  --title "WIP: badge color fix attempt" \
-  --body "Stale PR that fails the prettier CI check."
-git checkout main
 ```
 
-Then add all three items to the **GitHub Project #2** board with status **Backlog**.
+The script prints your project number at the end — use it in the commands below.
 
 ## Activities
 
 ### Phase 1 — Triage Engine (read-only)
 
 ```bash
-node orchestrator.mjs --triage-only
+node orchestrator.mjs --triage-only --project-number <YOUR_PROJECT_NUMBER>
 ```
 
 Watch the agent read Issues #1 and #2 and decide:
-- Issue #1 → **eligible** (clear bug, specific test, component lock)
-- Issue #2 → **needs_owner** (vague, no acceptance criteria)
--
-this should move the instanses in the project board
+- Issue #1 → **eligible** (clear bug, specific test, component lock) → moved to **Autonomous** on your board
+- Issue #2 → **needs_owner** (vague, no acceptance criteria) → moved to **Needs owner** on your board
 
 ### Phase 2 — Autonomous Worker
 
 ```bash
-node orchestrator.mjs --run-worker --issue 1
+node orchestrator.mjs --run-worker --issue 1 --project-number <YOUR_PROJECT_NUMBER>
 ```
 
 Watch the agent:
