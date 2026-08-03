@@ -15,10 +15,8 @@ npm install
 # 3. Authenticate with GitHub CLI
 gh auth login
 
-# 4. Set your Anthropic API key
-export ANTHROPIC_API_KEY=sk-ant-...
 
-# 5. Install the claude CLI
+# 4. Install the claude CLI and use the gitlab auth flow to authenticate
 npm install -g @anthropic-ai/claude-code
 ```
 
@@ -33,6 +31,8 @@ node orchestrator.mjs --triage-only
 Watch the agent read Issues #1 and #2 and decide:
 - Issue #1 → **eligible** (clear bug, specific test, component lock)
 - Issue #2 → **needs_owner** (vague, no acceptance criteria)
+-
+this should move the instanses in the project board
 
 ### Phase 2 — Autonomous Worker
 
@@ -57,16 +57,6 @@ Edit the prompt in `orchestrator.mjs` → `buildWorkerPrompt()` to require a JSD
 node orchestrator.mjs --run-worker --pr 3
 ```
 Watch the agent pull the stale PR branch, fix prettier violations, and update the PR.
-
-## GitHub Actions (automated mode)
-
-| Workflow | Trigger | What it does |
-|---|---|---|
-| `ci.yml` | Every push / PR | `npm run lint` + `npm test` |
-| `triage.yml` (triage job) | Every 15 min | Read-only triage scan (project #2) |
-| `triage.yml` (worker job) | Manual dispatch | Fix issue or PR by number |
-
-Add `ANTHROPIC_API_KEY` to **Settings → Secrets** to enable the AI workflows.
 
 ## Architecture
 
