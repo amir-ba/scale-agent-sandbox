@@ -20,6 +20,27 @@ gh auth login
 npm install -g @anthropic-ai/claude-code
 ```
 
+## Seed the board (run once)
+
+Before the session, populate the repo with the pre-baked issues and stale PR:
+
+```bash
+# Creates Issue #1 (P0 bug) and Issue #2 (vague feature)
+bash scripts/seed-issues.sh
+
+# Create the stale PR that fails prettier (PR #3)
+git checkout -b stale-prettier-fix
+# Make a trivial whitespace change that breaks prettier rules
+echo "" >> src/components/scale-badge/scale-badge.tsx
+git commit -am "wip: attempted badge color fix"
+gh pr create \
+  --title "WIP: badge color fix attempt" \
+  --body "Stale PR that fails the prettier CI check."
+git checkout main
+```
+
+Then add all three items to the **GitHub Project #2** board with status **Backlog**.
+
 ## Activities
 
 ### Phase 1 — Triage Engine (read-only)
@@ -59,7 +80,7 @@ node orchestrator.mjs --run-worker --pr 3
 Watch the agent pull the stale PR branch, fix prettier violations, and update the PR.
 
 
-all the steps and the integaraion of this in claude code is flaky so we atempt to fix this as we go to learn together. 
+all the steps and the integaraion of this in claude code is flaky so we atempt to fix this as we go to learn together.
 ## Architecture
 
 ```
