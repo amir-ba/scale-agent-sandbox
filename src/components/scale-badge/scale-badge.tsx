@@ -14,3 +14,4 @@ export class ScaleBadge {
     return <span class="badge">{this.label}</span>;
   }
 }
+// wip
