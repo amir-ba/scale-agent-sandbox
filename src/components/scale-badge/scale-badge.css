@@ -8,15 +8,15 @@
   color: white;
 }
 
-:host([color="danger"]) .badge {
+:host([color='danger']) .badge {
   background-color: #e00;
 }
 
-:host([color="success"]) .badge {
+:host([color='success']) .badge {
   background-color: #0a0;
 }
 
-:host([color="warning"]) .badge {
+:host([color='warning']) .badge {
   background-color: #f90;
   color: #333;
 }

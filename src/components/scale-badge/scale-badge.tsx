@@ -11,10 +11,6 @@ export class ScaleBadge {
   @Prop() color: string = 'default';
 
   render() {
-    return (
-      <span class="badge">
-        {this.label}
-      </span>
-    );
+    return <span class="badge">{this.label}</span>;
   }
 }

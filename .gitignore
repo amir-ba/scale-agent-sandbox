@@ -3,3 +3,4 @@ dist/
 www/
 .barcamp-state/
 *.tmp
+.stencil/
